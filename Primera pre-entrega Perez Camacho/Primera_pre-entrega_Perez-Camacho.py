@@ -1,67 +1,72 @@
 
 
 def registro():
-
+    
+    #Toma el txt 'BaseDeDatos' y lee la info.
     BD = open('BaseDeDatos.txt', 'r')
-    Users = input('Cree su usuario nuevo: ')
-    Password = input('Cree su contraseña nueva: ')
-    Check_Password = input('Confirme la contraseña: ')
+    users = input('Cree su usuario nuevo: ')
+    password = input('Cree su contraseña nueva: ')
+    check_password = input('Confirme la contraseña: ')
 
-    Login_User = []
+    login_user = []
 
-    Login_Password = []
+    login_password = []
 
-
+    #La info dentro del txt 'BaseDeDatos' esta ingresada con una separación de ', '.
+    #Hacemos split y lo guardamos dentro de una lista y luego lo transformamos en diccionario.
     for i in BD:
         x,y = i.split(", ")
         y = y.strip()
-        Login_User.append(x)
-        Login_Password.append(y)
-    info = dict(zip(Login_User, Login_Password))
+        login_user.append(x)
+        login_password.append(y)
+    info = dict(zip(login_user, login_password))
     
-
-    if Password != Check_Password:
+    #Hacemo un check entro los dos inputs para ver sus igualdades, luego por si el input es demasiado corto.
+    #Por ultimo hace un check por si se encuentra el usuario en el txt 'Base de datos'.
+    if password != check_password:
         print('Contraseñas no coinciden, reintente ingresar otra vez')
         registro()
     else:
-        if len(Password) <= 6:
+        if len(password) <= 6:
             print('Contraseña muy corta, reintente ingresar otra vez')
             registro()
-        elif Users in Login_User:
+        elif users in login_user:
             print('Usuario ya existente, use otro usuario')
             registro()
         else:
             BD = open('BaseDeDatos.txt', 'a')
-            BD.write(Users+', '+Password+'\n')
+            BD.write(users+', '+password+'\n')
             print('Registrado con exito')
             Menu()
 
 
 def acceso():
 
+    #Toma el txt 'BaseDeDatos' y lee la info.
     BD = open('BaseDeDatos.txt', 'r')
-    User = input('Ingrese su usuario: ')
-    Password = input('Ingrese su contraseña: ')
+    user = input('Ingrese su usuario: ')
+    password = input('Ingrese su contraseña: ')
 
-    if not len(User or Password) < 1:
+    #Check de si hubo un ingreso de información.
+    if not len(user or password) < 1:
 
-        Login_User = []
+        login_user = []
 
-        Login_Password = []
+        login_password = []
 
 
         for i in BD:
             x,y = i.split(", ")
             y = y.strip()
-            Login_User.append(x)
-            Login_Password.append(y)
-        info = dict(zip(Login_User, Login_Password))
+            login_user.append(x)
+            login_password.append(y)
+        info = dict(zip(login_user, login_password))
 
-
+        #Check de si en el diccionario 'info' existe el usuario y coincide con contraseña. 
         try:
-            if info[User]:
+            if info[user]:
                 try:
-                    if Password == info[User]:
+                    if password == info[user]:
                         print('ingreso con exito')
                     else:
                         print('Usuario o Contraseña incorrectos')
@@ -77,30 +82,30 @@ def Menu():
 
     BD = open('BaseDeDatos.txt', 'r')
 
-    Login_User = []
-    Login_Password = []
+    login_user = []
+    login_password = []
 
     for i in BD:
         x,y = i.split(", ")
         y = y.strip()
-        Login_User.append(x)
-        Login_Password.append(y)
-    info = dict(zip(Login_User, Login_Password))
+        login_user.append(x)
+        login_password.append(y)
+    info = dict(zip(login_user, login_password))
 
     print('Ingrese (1) para Iniciar sesión: ')
     print('Ingrese (2) para Registrar un Usuario: ')
     print('Ingrese (3) para mostrar los usuarios: ')
     print('Ingrese (4) para finalizar: ')
 
-    Option = input('Ingrese su opción: ')
+    option = input('Ingrese su opción: ')
 
-    if Option == ('1'):
+    if option == ('1'):
         acceso()
-    elif Option == ('2'):
+    elif option == ('2'):
         registro()
-    elif Option == ('3'):
+    elif option == ('3'):
         print(info)
-    elif Option == ('4'):
+    elif option == ('4'):
         print('Aplicación finalizada')
     else:
         print('valor ingresado no coincide con ninguna opción, vuelva a intentarlo')
