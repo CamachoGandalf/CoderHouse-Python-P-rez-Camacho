@@ -3,36 +3,36 @@
 def registro():
 
     BD = open('BaseDeDatos.txt', 'r')
-    Usuario = input('Cree su usuario nuevo: ')
-    Contraseña = input('Cree su contraseña nueva: ')
-    CheckContraseña = input('Confirme la contraseña: ')
+    Users = input('Cree su usuario nuevo: ')
+    Password = input('Cree su contraseña nueva: ')
+    Check_Password = input('Confirme la contraseña: ')
 
-    Lusuario = []
+    Login_User = []
 
-    Lcontraseña = []
+    Login_Password = []
 
 
     for i in BD:
         x,y = i.split(", ")
         y = y.strip()
-        Lusuario.append(x)
-        Lcontraseña.append(y)
-    info = dict(zip(Lusuario, Lcontraseña))
+        Login_User.append(x)
+        Login_Password.append(y)
+    info = dict(zip(Login_User, Login_Password))
     
 
-    if Contraseña != CheckContraseña:
+    if Password != Check_Password:
         print('Contraseñas no coinciden, reintente ingresar otra vez')
         registro()
     else:
-        if len(Contraseña) <= 6:
+        if len(Password) <= 6:
             print('Contraseña muy corta, reintente ingresar otra vez')
             registro()
-        elif Usuario in Lusuario:
+        elif Users in Login_User:
             print('Usuario ya existente, use otro usuario')
             registro()
         else:
             BD = open('BaseDeDatos.txt', 'a')
-            BD.write(Usuario+', '+Contraseña+'\n')
+            BD.write(Users+', '+Password+'\n')
             print('Registrado con exito')
             Menu()
 
@@ -40,28 +40,28 @@ def registro():
 def acceso():
 
     BD = open('BaseDeDatos.txt', 'r')
-    Usuario = input('Ingrese su usuario: ')
-    Contraseña = input('Ingrese su contraseña: ')
+    User = input('Ingrese su usuario: ')
+    Password = input('Ingrese su contraseña: ')
 
-    if not len(Usuario or Contraseña) < 1:
+    if not len(User or Password) < 1:
 
-        Lusuario = []
+        Login_User = []
 
-        Lcontraseña = []
+        Login_Password = []
 
 
         for i in BD:
             x,y = i.split(", ")
             y = y.strip()
-            Lusuario.append(x)
-            Lcontraseña.append(y)
-        info = dict(zip(Lusuario, Lcontraseña))
+            Login_User.append(x)
+            Login_Password.append(y)
+        info = dict(zip(Login_User, Login_Password))
 
 
         try:
-            if info[Usuario]:
+            if info[User]:
                 try:
-                    if Contraseña == info[Usuario]:
+                    if Password == info[User]:
                         print('ingreso con exito')
                     else:
                         print('Usuario o Contraseña incorrectos')
@@ -70,37 +70,37 @@ def acceso():
             else:
                 print('Usuario no existe')
         except:
-            print('Error en el sistema')
+            print('Usuario no existe')
                     
 
 def Menu():
 
     BD = open('BaseDeDatos.txt', 'r')
 
-    Lusuario = []
-    Lcontraseña = []
+    Login_User = []
+    Login_Password = []
 
     for i in BD:
         x,y = i.split(", ")
         y = y.strip()
-        Lusuario.append(x)
-        Lcontraseña.append(y)
-    info = dict(zip(Lusuario, Lcontraseña))
+        Login_User.append(x)
+        Login_Password.append(y)
+    info = dict(zip(Login_User, Login_Password))
 
     print('Ingrese (1) para Iniciar sesión: ')
     print('Ingrese (2) para Registrar un Usuario: ')
     print('Ingrese (3) para mostrar los usuarios: ')
     print('Ingrese (4) para finalizar: ')
 
-    Loop = input('Ingrese su opción: ')
+    Option = input('Ingrese su opción: ')
 
-    if Loop == ('1'):
+    if Option == ('1'):
         acceso()
-    elif Loop == ('2'):
+    elif Option == ('2'):
         registro()
-    elif Loop == ('3'):
+    elif Option == ('3'):
         print(info)
-    elif Loop == ('4'):
+    elif Option == ('4'):
         print('Aplicación finalizada')
     else:
         print('valor ingresado no coincide con ninguna opción, vuelva a intentarlo')
