@@ -110,10 +110,7 @@ def Menu():
     else:
         print('valor ingresado no coincide con ninguna opción, vuelva a intentarlo')
         Menu()
-    
-    
-        
-Menu()
+
 
 
     

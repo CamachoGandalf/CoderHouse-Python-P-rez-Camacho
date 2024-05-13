@@ -1,0 +1,11 @@
+README.md
+setup.py
+paquete/__init__.py
+paquete/clientes.py
+paquete/login.py
+paquete/main.py
+paquete/productos.py
+paquete.egg-info/PKG-INFO
+paquete.egg-info/SOURCES.txt
+paquete.egg-info/dependency_links.txt
+paquete.egg-info/top_level.txt
