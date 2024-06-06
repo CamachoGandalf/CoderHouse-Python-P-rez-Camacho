@@ -6,9 +6,16 @@
     <title>Aca hay un titulo sobre milanesas que atrapa al lector</title>
 
     {% if request.user.is_authenticated %}
-      <p>Hola, {{request.user.username}} | <a href="{% url 'logout' %}">logout</a></p>
+      <p><a href="{% url 'home' %}">Home</a> | <a href="{% url 'logout' %}">logout</a></p>
+      <p>Hola, {{request.user.username}}</p>
     {% else %}
-      <p><a href="{% url 'register' %}">Registro</a> | <a href="#">Login</a></p>
+      <p>
+        
+        <a href="{% url 'home' %}">Home</a> | 
+        <a href="{% url 'register' %}">Registro</a> | 
+        <a href="{% url ´login' %}">login</a>
+      
+      </p>
 
     {% endif %}
 

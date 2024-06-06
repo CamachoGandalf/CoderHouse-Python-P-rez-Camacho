@@ -3,9 +3,9 @@
 
 {% block content %}
 
-<h2>Register</h2>
+<h2>login</h2>
 <form method="post">{% csrf_token %}
-    {% for field in registration_form %}
+    {% for field in login_form %}
         <p>
             {{field.label_tag}}
             {{field}}
@@ -17,17 +17,17 @@
             [% for error in field.errors %]
             <small style="color: red;">{{error}}</small>
             {% endfor %}
-            
+
+            {% if login_form.nonfield_errors %}
+                <div style="color:red;">
+                    <p>{{login_form.non_field_errors}} </p>
+                </div>
+            {% endif %}
+
         </p>
     {% endfor %}
-    <button type="enter">Register</button>
+    <button type="enter">login</button>
     
 
 
 </form>
-
-
-
-
-
-{% endblock content %}
