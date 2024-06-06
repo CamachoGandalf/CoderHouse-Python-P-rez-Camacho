@@ -1,11 +1,12 @@
 from django.shortcuts import render
-from mix_other.models import Question
+from account.models import Account
 
 
 def home_screen_view(request):
 
     context = {}
-    questions = Question.objects.all()
-    context['questions'] = questions
- 
+
+    accounts = Account.object.all()
+    context['accounts'] = accounts
+
     return render(request, "personal/home.html", context)
