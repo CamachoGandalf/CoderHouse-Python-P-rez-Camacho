@@ -3,9 +3,9 @@
 
 {% block content %}
 
-<h2>login</h2>
+<h2>Cuenta</h2>
 <form method="post">{% csrf_token %}
-    {% for field in login_form %}
+    {% for field in account_form %}
         <p>
 
             {{field.label_tag}}
@@ -19,18 +19,19 @@
 
     {% endfor %}
 
-    {% for field in login_form %}
+    {% for field in account_form %}
         [% for error in field.errors %]
             <small style="color: red;">{{error}}</small>
         {% endfor %}
     {% endfor %}
 
-    {% if login_form.nonfield_errors %}
+
+    {% if account_form.nonfield_errors %}
         <div style="color:red;">
-            <p>{{login_form.non_field_errors}} </p>
+            <p>{{account_form.non_field_errors}} </p>
         </div>
     {% endif %}
-    <button type="enter">login</button>
+    <button type="enter">guardar cambios</button>
     
 </form>
 

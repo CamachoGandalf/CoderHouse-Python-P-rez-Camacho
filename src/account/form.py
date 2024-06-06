@@ -25,12 +25,39 @@ class AccountAuthenticationForm(forms.ModelsForm):
         fields = ('email', 'password')
 
     def clean(self):
-        email = self.clean_data['email']
-        password = self.clean_data['password']
-        if not authenticate(email=email, password=password):
-            raise forms.ValidationError('login erroneo')
+        if self.is_valid():
+
+            email = self.clean_data['email']
+            password = self.clean_data['password']
+            if not authenticate(email=email, password=password):
+                raise forms.ValidationError('login erroneo')
 
 
+
+
+class AccountUpdateForm(forms.ModelForm):
+
+    class Meta:
+        model = Accountfields = ('email', 'username')
+
+    def clean_email(self):
+        if self.is_valid():
+            email = self.cleaned_data['email']
+            try:
+                account = Account.object.exclude(pk=self.instance.pk).get(email=email)
+            except Account.DoesNotExist:
+                return email
+        raise forms.ValidationError("email '%s' esta en uso." % account.email)
+    
+
+    def clean_username(self):
+        if self.is_valid():
+            username = self.cleaned_data['username']
+            try:
+                account = Account.object.exclude(pk=self.instance.pk).get(username=username)
+            except Account.DoesNotExist:
+                return username
+        raise forms.ValidationError("usuario '%s' esta en uso." % account.username)
 
 
 
