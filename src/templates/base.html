@@ -1,9 +1,18 @@
 <!DOCTYPE html>
+
 <html>
 
 <head>
     <title>Aca hay un titulo sobre milanesas que atrapa al lector</title>
-    <h1>prueba 2</h1>
+
+    {% if request.user.is_authenticated %}
+      <p>Hola, {{request.user.username}} | <a href="{% url 'logout' %}">logout</a></p>
+    {% else %}
+      <p><a href="{% url 'register' %}">Registro</a> | <a href="#">Login</a></p>
+
+    {% endif %}
+
+    
 </head>
 
  <body>
@@ -15,6 +24,10 @@
  </body>
 
  <footer>
-    <h3>Aca hay texto de como la milanesa de soja es un sacrilegio</h3>
+
+   <hr>
+   <p>Messi es amigo de Mauro profe | 2024</p>
+
  </footer>
+
 </html>
